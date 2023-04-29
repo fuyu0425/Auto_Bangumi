@@ -36,6 +36,6 @@ jobs:
           platforms: linux/arm
           push: true
           tags: |
-            estrellaxd/auto_bangumi:latest
-            estrellaxd/auto_bangumi:${{ github.ref_name }}
+            fuyu0425/auto_bangumi:latest
+            fuyu0425/auto_bangumi:${{ github.ref_name }}
           labels: ${{ steps.meta.outputs.labels }}
