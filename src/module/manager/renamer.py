@@ -51,8 +51,11 @@ class Renamer:
         new_path = self._renamer.download_parser(old_name, folder_name, season, suffix)
         if compare_name != new_path:
             try:
+                old_exists = os.path.exists(media_path)
                 self.client.rename_torrent_file(_hash=info.hash, old_path=media_path, new_path=new_path)
-                self.notification.send_msg(folder_name, "update")
+                # FIXME: Too much notification
+                if not old_exists:
+                    self.notification.send_msg(folder_name, "update")
             except Exception as e:
                 logger.warning(f"{old_name} rename failed")
                 logger.warning(f"Folder name: {folder_name}, Season: {season}, Suffix: {suffix}")
@@ -137,4 +140,3 @@ if __name__ == '__main__':
     client = DownloadClient()
     rn = Renamer(client)
     rn.rename()
-
